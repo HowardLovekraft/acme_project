@@ -1,9 +1,18 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import ListView
+
 
 from .forms import BirthdayForm
 from .models import Birthday
 from .utils import calculate_birthday_countdown
+
+
+class BirthdayListView(ListView):
+    model = Birthday
+    ordering = 'id'
+    paginate_by = 10
 
 
 def birthday(request, pk: int|None = None) -> HttpResponse:
@@ -37,10 +46,3 @@ def delete_birthday(request, pk: int) -> HttpResponse:
         return redirect('birthday:list')
     
     return render(request, 'birthday/birthday.html', context)
-
-
-def birthday_list(request) -> HttpResponse:
-    birthdays = Birthday.objects.all()
-    context = {'birthdays': birthdays}
-
-    return render(request, 'birthday/birthday_list.html', context)
