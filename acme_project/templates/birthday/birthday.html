@@ -10,12 +10,14 @@
   {% else %}
     <h1>Создать запись</h1>
   {% endif %}
+
   <div class="card col-4">
     <div class="card-header">
       Калькулятор ожидания дня рождения
     </div>
+
     <div class="card-body">
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% if '/delete/' not in request.path %}
             {% bootstrap_form form %}
@@ -26,6 +28,7 @@
         {% bootstrap_button button_type="submit" content="Отправить" %}
       </form>
     </div>
+
   </div>
   
     {% if form.is_valid %}
