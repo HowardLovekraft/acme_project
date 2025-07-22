@@ -1,6 +1,6 @@
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import (
+    CreateView, DeleteView, DetailView, ListView, UpdateView
+)
 from django.urls import reverse_lazy
 
 
@@ -17,21 +17,27 @@ class BirthdayListView(ListView):
     # cuz template name is '<app_name>/<model_name>_list.html'
 
 
-class BirthdayMixin:
+class BirthdayCreateView(CreateView):
+    model = Birthday
+    form_class = BirthdayForm
+
+
+class BirthdayUpdateView(UpdateView):
+    model = Birthday
+    form_class = BirthdayForm
+
+
+class BirthdayDeleteView(DeleteView):
     model = Birthday
     success_url = reverse_lazy('birthday:list')
 
 
-class BirthdayFormMixin:
-    form_class = BirthdayForm
-    template_name = 'birthday/birthday.html'
+class BirthdayDetailView(DetailView):
+    model = Birthday
 
-
-class BirthdayCreateView(BirthdayMixin, BirthdayFormMixin, CreateView):
-    pass
-
-class BirthdayUpdateView(BirthdayMixin, BirthdayFormMixin, UpdateView):
-    pass
-
-class BirthdayDeleteView(BirthdayMixin, DeleteView):
-    pass
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)
+        context['birthday_countdown'] = calculate_birthday_countdown(
+            self.object.birthday
+        )
+        return context
