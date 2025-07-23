@@ -99,7 +99,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Email backend
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
+
+# Login
+LOGIN_REDIRECT_URL = 'pages:homepage'
