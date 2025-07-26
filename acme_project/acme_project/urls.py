@@ -1,12 +1,14 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import include, path, reverse_lazy
+from django.views.generic.edit import CreateView
 
 
 urlpatterns = [
     path('', include('pages.urls')),
-    path('auth/', include('django.contrib.auth.urls')), 
+    path('auth/', include('users.urls')),
     path('admin/', admin.site.urls),
     path('birthday/', include('birthday.urls')),
 ]
