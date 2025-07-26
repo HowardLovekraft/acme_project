@@ -12,10 +12,12 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    # Set debug tools
-    from  debug_toolbar.toolbar import debug_toolbar_urls
+    # Set debug tools (for Django 3)
+    import debug_toolbar
 
-    urlpatterns += debug_toolbar_urls()
+    urlpatterns += (
+        path('__debug__/', include(debug_toolbar.urls)),
+    )
 
     # Render media via Django, not via Nginx-like tool
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
