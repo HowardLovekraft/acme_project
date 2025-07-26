@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-m&$lzdzkutvrbr5vt=jpm)7#g7cken_tk%($ty+w902n7wb#=e'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'birthday.apps.BirthdayConfig',
     'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
+    'core.apps.CoreConfig',
     'django_bootstrap5',
     'debug_toolbar',
 ]
@@ -118,3 +119,7 @@ LOGIN_REDIRECT_URL = 'pages:homepage'
 
 # Custom User
 AUTH_USER_MODEL = 'users.MyUser'
+
+
+# Default views
+CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
