@@ -81,6 +81,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ] 
 
+# I18n and l10n
 LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
@@ -90,6 +91,7 @@ USE_I18N = True
 USE_L10N = False
 
 USE_TZ = True
+
 
 STATIC_URL = '/static/'
 
@@ -105,4 +107,6 @@ EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
 
 # Login
+LOGIN_URL = 'login'
+
 LOGIN_REDIRECT_URL = 'pages:homepage'
