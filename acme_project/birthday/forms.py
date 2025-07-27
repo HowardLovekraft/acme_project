@@ -16,7 +16,9 @@ class BirthdayForm(forms.ModelForm):
 
     class Meta:
         model = Birthday
-        fields = '__all__'
+        fields = (
+            'first_name', 'last_name', 'birthday', 'image', 'tags'
+        )
         widgets = {
             'birthday': forms.DateInput(
                 attrs={'type': 'date'},

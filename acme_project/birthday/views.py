@@ -14,6 +14,7 @@ from .utils import calculate_birthday_countdown
 class BirthdayListView(ListView):
     model = Birthday
     ordering = 'id'
+    queryset = Birthday.objects.prefetch_related('tags').select_related('author')
     paginate_by = 10
     # don't need config template_name
     # cuz template name is '<app_name>/<model_name>_list.html'
@@ -22,6 +23,10 @@ class BirthdayListView(ListView):
 class BirthdayCreateView(CreateView):
     model = Birthday
     form_class = BirthdayForm
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 class BirthdayUpdateView(UpdateView):
