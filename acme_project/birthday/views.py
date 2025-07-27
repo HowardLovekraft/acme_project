@@ -54,6 +54,10 @@ class BirthdayDetailView(DetailView):
         context['birthday_countdown'] = calculate_birthday_countdown(
             self.object.birthday
         )
+        context['form'] = CongratulationForm()
+        context['congratulations'] = (
+            self.object.congratulations.select_related('author')
+        )
         return context
     
 

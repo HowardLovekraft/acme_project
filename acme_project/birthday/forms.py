@@ -25,7 +25,6 @@ class BirthdayForm(forms.ModelForm):
 
     def clean_first_name(self) -> str:
         first_name: str = self.cleaned_data['first_name']
-
         return first_name.split()[0]
     
     def clean(self) -> None:
@@ -41,7 +40,6 @@ class BirthdayForm(forms.ModelForm):
                 recipient_list=['admin@acme.not'],
                 fail_silently=False,
             )
-
             raise ValidationError(
                 'Мы тоже любим Битлз, но введите, пожалуйста, настоящее имя!'
             )
